@@ -7,30 +7,30 @@
 #include "sstream"
 
 
-const int kylo1024 = 1024;
-const int kylo1000 = 1000;
-const double four = 4.;
-const int sixteen = 16;
+const int it1024 = 1024;
+const int it1000 = 1000;
+const double fr = 4.;
+const int st = 16;
 
 void test::straight_test() {
   var_of_test = "direction";
   durations_of_test.clear();
   [[maybe_unused]] int vault;
   for (const double &size : sizes_of_bufs) {
-    int *arr1 = new int[static_cast<int>(size / four)];
-    for (int i = 0; i < size / four; i += sixteen) {
+    int *arr1 = new int[static_cast<int>(size / fr)];
+    for (int i = 0; i < size / fr; i += st) {
       vault = arr1[i];
     }
     auto startTime = std::chrono::steady_clock::now();
-    for (int item = 0; item < kylo1000; ++item) {
-      for (int i = 0; i < size / four; i += sixteen) {
+    for (int item = 0; item < it1000; ++item) {
+      for (int i = 0; i < size / fr; i += st) {
         vault = arr1[i];
       }
     }
     auto endTime = std::chrono::steady_clock::now();
     durations_of_test.push_back(
         std::chrono::duration_cast<std::chrono::microseconds>
-            (endTime - startTime).count()/kylo1000);
+            (endTime - startTime).count()/it1000);
     delete[] arr1;
   }
 }
@@ -42,13 +42,13 @@ void test::revert_test() {
   [[maybe_unused]] int vault;
 
   for (const double &size : sizes_of_bufs) {
-    int *arr1 = new int[static_cast<int>(size / four)];
-    for (int i = size / four-1; i > 0; i -= sixteen) {
+    int *arr1 = new int[static_cast<int>(size / fr)];
+    for (int i = size / fr-1; i > 0; i -= st) {
       vault = arr1[i];
     }
     auto startTime = std::chrono::steady_clock::now();
-    for (int i = 0; i < kylo1000; ++i) {
-      for (int j = size / four-1; j > 0; j -= sixteen) {
+    for (int i = 0; i < it1000; ++i) {
+      for (int j = size / fr-1; j > 0; j -= st) {
         vault = arr1[j];
       }
     }
@@ -56,7 +56,7 @@ void test::revert_test() {
 
     durations_of_test.push_back(
         std::chrono::duration_cast<std::chrono::microseconds>
-            (endTime - startTime).count()/kylo1000);
+            (endTime - startTime).count()/it1000);
     delete[] arr1;
   }
 }
@@ -67,9 +67,9 @@ void test::random_test() {
   [[maybe_unused]]int vault;
 
   for (const double &size : sizes_of_bufs) {
-    int *arr1 = new int[static_cast<int>(size / four)];
+    int *arr1 = new int[static_cast<int>(size / fr)];
     std::vector<int> indexesOfBlocks;
-    for (int j = 0; j < size / four; j += sixteen) {
+    for (int j = 0; j < size / fr; j += st) {
       indexesOfBlocks.push_back(j);
       vault = arr1[j];
     }
@@ -77,7 +77,7 @@ void test::random_test() {
     std::shuffle(indexesOfBlocks.begin(), indexesOfBlocks.end(), rng);
 
     auto startTime = std::chrono::steady_clock::now();
-    for (int i = 0; i < kylo1000; ++i) {
+    for (int i = 0; i < it1000; ++i) {
       for (auto index : indexesOfBlocks) {
         vault = arr1[index];
       }
@@ -85,7 +85,7 @@ void test::random_test() {
     auto endTime = std::chrono::steady_clock::now();
     durations_of_test.push_back(
         std::chrono::duration_cast<std::chrono::microseconds>
-            (endTime - startTime).count()/kylo1000);
+            (endTime - startTime).count()/it1000);
     delete[] arr1;
   }
 }
@@ -95,7 +95,7 @@ std::stringstream test::get_exp(int indexOfBuf) {
   ss << "\t- experiment:\n"
      << "\t\tnumber: " << indexOfBuf + 1 << "\n"
      << "\t\tinput_data:\n"
-     << "\t\t\tbuffer_size: " << sizes_of_bufs[indexOfBuf] / kylo1024 << "Kb"
+     << "\t\t\tbuffer_size: " << sizes_of_bufs[indexOfBuf] / it1024 << "Kb"
      << "\n"
      << "\t\tresults:\n"
      << "\t\t\tduration: " << durations_of_test[indexOfBuf] << "mcs" << '\n';
@@ -129,9 +129,9 @@ std::ostream & operator << (std::ostream & out, test & invest){
 }
 
 void test::set_bufs() {
-  sizes_of_bufs.push_back(sizes_of_cashes[0] / 2.0 * kylo1024 * kylo1024);
+  sizes_of_bufs.push_back(sizes_of_cashes[0] / 2.0 * it1024 * it1024);
   for (int i = 1; i <= 1.5 * sizes_of_cashes[2]; i *= 2) {
-    sizes_of_bufs.push_back(i * kylo1024 * kylo1024);
+    sizes_of_bufs.push_back(i * it1024 * it1024);
   }
-  sizes_of_bufs.push_back(sizes_of_cashes[2] * 1.5 * kylo1024 * kylo1024);
+  sizes_of_bufs.push_back(sizes_of_cashes[2] * 1.5 * it1024 * it1024);
 }
