@@ -1,5 +1,10 @@
 # Лабораторная работа №2
 
+
+| branch | status |
+|--------|--------|
+|  dev   | [![CI](https://github.com/B0NKER5/lab02-cache1/workflows/CI/badge.svg?branch=dev)](https://github.com/B0NKER5/lab02-cache1/actions/runs/441894430)|
+
 В большинстве современных ПК используется следующая иерархия памяти:
 | Тип | Скорость доступа | Размер |
 | - | - | - |
@@ -132,29 +137,128 @@ cache_size['3'] = 8 mb;
 
 ### Результаты
 
-Ниже представлен формат и пример отчета:
+#### Отчет:
 
 ```yaml
-investigation:                                       |  investigaion:
-  travel_variant: <вариант_прохода>                  |    travel_order: "direction"
-  experiments:                                       |    experiments:
-  - experiment:                                      |    - experiment:
-      number:                                        |        number: 1
-      input_data:                                    |        input_data:
-        buffer_size: <размер_буфера>                 |          buffer_size: "1mb"
-      results:                                       |        results:
-        duration: <продолжительность>                |          duration: "1ns"
-  - experiment:                                      |    - experiment:
-      number: <номер_эксперимента>                   |        number: 2
-      input_data:                                    |        input_data:
-        buffer_size: <размер_буфера>                 |          buffer_size: "2mb"
-      results:                                       |        results:
-        duration: <продолжительность>                |          duration: "2ns"
-                                                     |
-investigation:                                       |  investigation:
-...                                                  |  ...
+investigation:
+1: 	travel_variant: direction
+1: 	- experiment:
+1: 		number: 1
+1: 		input_data:
+1: 			buffer_size: 128Kb
+1: 		results:
+1: 			duration: 5mcs
+1: 	- experiment:
+1: 		number: 2
+1: 		input_data:
+1: 			buffer_size: 1024Kb
+1: 		results:
+1: 			duration: 39mcs
+1: 	- experiment:
+1: 		number: 3
+1: 		input_data:
+1: 			buffer_size: 2048Kb
+1: 		results:
+1: 			duration: 79mcs
+1: 	- experiment:
+1: 		number: 4
+1: 		input_data:
+1: 			buffer_size: 4096Kb
+1: 		results:
+1: 			duration: 177mcs
+1: 	- experiment:
+1: 		number: 5
+1: 		input_data:
+1: 			buffer_size: 8192Kb
+1: 		results:
+1: 			duration: 385mcs
+1: 	- experiment:
+1: 		number: 6
+1: 		input_data:
+1: 			buffer_size: 9216Kb
+1: 		results:
+1: 			duration: 412mcs
+1: 
+1: investigation:
+1: 	travel_variant: reverse
+1: 	- experiment:
+1: 		number: 1
+1: 		input_data:
+1: 			buffer_size: 128Kb
+1: 		results:
+1: 			duration: 6mcs
+1: 	- experiment:
+1: 		number: 2
+1: 		input_data:
+1: 			buffer_size: 1024Kb
+1: 		results:
+1: 			duration: 47mcs
+1: 	- experiment:
+1: 		number: 3
+1: 		input_data:
+1: 			buffer_size: 2048Kb
+1: 		results:
+1: 			duration: 99mcs
+1: 	- experiment:
+1: 		number: 4
+1: 		input_data:
+1: 			buffer_size: 4096Kb
+1: 		results:
+1: 			duration: 191mcs
+1: 	- experiment:
+1: 		number: 5
+1: 		input_data:
+1: 			buffer_size: 8192Kb
+1: 		results:
+1: 			duration: 398mcs
+1: 	- experiment:
+1: 		number: 6
+1: 		input_data:
+1: 			buffer_size: 9216Kb
+1: 		results:
+1: 			duration: 435mcs
+1: 
+1: investigation:
+1: 	travel_variant: random
+1: 	- experiment:
+1: 		number: 1
+1: 		input_data:
+1: 			buffer_size: 128Kb
+1: 		results:
+1: 			duration: 20mcs
+1: 	- experiment:
+1: 		number: 2
+1: 		input_data:
+1: 			buffer_size: 1024Kb
+1: 		results:
+1: 			duration: 177mcs
+1: 	- experiment:
+1: 		number: 3
+1: 		input_data:
+1: 			buffer_size: 2048Kb
+1: 		results:
+1: 			duration: 355mcs
+1: 	- experiment:
+1: 		number: 4
+1: 		input_data:
+1: 			buffer_size: 4096Kb
+1: 		results:
+1: 			duration: 755mcs
+1: 	- experiment:
+1: 		number: 5
+1: 		input_data:
+1: 			buffer_size: 8192Kb
+1: 		results:
+1: 			duration: 1809mcs
+1: 	- experiment:
+1: 		number: 6
+1: 		input_data:
+1: 			buffer_size: 9216Kb
+1: 		results:
+1: 			duration: 2174mcs
+...                                                 
 ```
-
+![Cache](./images/Screenshot.png)
 ### Рекомендации
 
 При создание неиспользуемых переменных для считывание данных из буфера можно использовать аттрибут `[[maybe_unused]]`
